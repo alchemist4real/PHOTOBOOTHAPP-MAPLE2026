@@ -2813,7 +2813,7 @@ const filterOptions = [
 
 // --- Real QR Code via 'qrcode' library ---
 
-function QRCodeSvg({ value = "https://sehatin-booth.vercel.app", size = 120 }) {
+function QRCodeSvg({ value = "https://photoboothapp-maple2026.vercel.app", size = 120 }) {
   const [dataUrl, setDataUrl] = useState(null);
   React.useEffect(() => {
     QRCodeLib.toDataURL(value, {
