@@ -1,0 +1,164 @@
+[
+  {
+    "id": "whale_shark",
+    "label": "Whale Shark",
+    "filename": "whale_shark.png",
+    "src": "/stickers/whale_shark.png",
+    "width": 164,
+    "height": 120,
+    "cat": "Ocean"
+  },
+  {
+    "id": "tomato",
+    "label": "Heirloom Tomato",
+    "filename": "tomato.png",
+    "src": "/stickers/tomato.png",
+    "width": 145,
+    "height": 138,
+    "cat": "Fruit"
+  },
+  {
+    "id": "blueberries",
+    "label": "Blueberries Burst",
+    "filename": "blueberries.png",
+    "src": "/stickers/blueberries.png",
+    "width": 188,
+    "height": 180,
+    "cat": "Fruit"
+  },
+  {
+    "id": "oval_sardines",
+    "label": "Oval Sardine Can",
+    "filename": "oval_sardines.png",
+    "src": "/stickers/oval_sardines.png",
+    "width": 110,
+    "height": 174,
+    "cat": "Sardines"
+  },
+  {
+    "id": "tin_sardines",
+    "label": "Red Key Sardine Tin",
+    "filename": "tin_sardines.png",
+    "src": "/stickers/tin_sardines.png",
+    "width": 149,
+    "height": 148,
+    "cat": "Sardines"
+  },
+  {
+    "id": "fig_slice",
+    "label": "Fresh Fig",
+    "filename": "fig_slice.png",
+    "src": "/stickers/fig_slice.png",
+    "width": 132,
+    "height": 134,
+    "cat": "Fruit"
+  },
+  {
+    "id": "red_goldfish",
+    "label": "Red Goldfish",
+    "filename": "red_goldfish.png",
+    "src": "/stickers/red_goldfish.png",
+    "width": 132,
+    "height": 149,
+    "cat": "Fish"
+  },
+  {
+    "id": "rainbow_tuna",
+    "label": "Rainbow Tuna",
+    "filename": "rainbow_tuna.png",
+    "src": "/stickers/rainbow_tuna.png",
+    "width": 233,
+    "height": 88,
+    "cat": "Fish"
+  },
+  {
+    "id": "orange_goldfish",
+    "label": "Orange Goldfish",
+    "filename": "orange_goldfish.png",
+    "src": "/stickers/orange_goldfish.png",
+    "width": 157,
+    "height": 128,
+    "cat": "Fish"
+  },
+  {
+    "id": "salmon",
+    "label": "Pink Salmon",
+    "filename": "salmon.png",
+    "src": "/stickers/salmon.png",
+    "width": 238,
+    "height": 83,
+    "cat": "Fish"
+  },
+  {
+    "id": "pomegranate",
+    "label": "Ripe Pomegranate",
+    "filename": "pomegranate.png",
+    "src": "/stickers/pomegranate.png",
+    "width": 136,
+    "height": 139,
+    "cat": "Fruit"
+  },
+  {
+    "id": "mango",
+    "label": "Sweet Mango",
+    "filename": "mango.png",
+    "src": "/stickers/mango.png",
+    "width": 149,
+    "height": 133,
+    "cat": "Fruit"
+  },
+  {
+    "id": "yellow_sardine",
+    "label": "Yellow Sardine",
+    "filename": "yellow_sardine.png",
+    "src": "/stickers/yellow_sardine.png",
+    "width": 246,
+    "height": 77,
+    "cat": "Fish"
+  },
+  {
+    "id": "peeled_orange",
+    "label": "Peeled Clementine",
+    "filename": "peeled_orange.png",
+    "src": "/stickers/peeled_orange.png",
+    "width": 142,
+    "height": 113,
+    "cat": "Fruit"
+  },
+  {
+    "id": "crane_bird",
+    "label": "Star Crane Bird",
+    "filename": "crane_bird.png",
+    "src": "/stickers/crane_bird.png",
+    "width": 123,
+    "height": 178,
+    "cat": "Bird"
+  },
+  {
+    "id": "blue_mackerel",
+    "label": "Blue Mackerel",
+    "filename": "blue_mackerel.png",
+    "src": "/stickers/blue_mackerel.png",
+    "width": 245,
+    "height": 74,
+    "cat": "Fish"
+  },
+  {
+    "id": "vertical_fish_trio",
+    "label": "Colorful Fish Trio",
+    "filename": "vertical_fish_trio.png",
+    "src": "/stickers/vertical_fish_trio.png",
+    "width": 134,
+    "height": 219,
+    "cat": "Fish"
+  },
+  {
+    "id": "yellow_bell_pepper",
+    "label": "Yellow Bell Pepper",
+    "filename": "yellow_bell_pepper.png",
+    "src": "/stickers/yellow_bell_pepper.png",
+    "width": 197,
+    "height": 217,
+    "cat": "Fruit"
+  }
+]

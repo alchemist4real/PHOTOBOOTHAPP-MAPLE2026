@@ -1,0 +1,1003 @@
+[
+  {
+    "id": "zine_art",
+    "name": "Hand-Drawn Zine Art",
+    "icon": "\ud83c\udfa8",
+    "subpacks": [
+      {
+        "id": "zine_hand_drawn",
+        "name": "Illustrated Zine Pack",
+        "items": [
+          {
+            "id": "whale_shark",
+            "label": "Whale Shark",
+            "filename": "whale_shark.png",
+            "width": 164,
+            "height": 120,
+            "src": "/stickers/whale_shark.png",
+            "pack_id": "zine_art",
+            "subpack_id": "zine_hand_drawn"
+          },
+          {
+            "id": "tomato",
+            "label": "Heirloom Tomato",
+            "filename": "tomato.png",
+            "width": 145,
+            "height": 138,
+            "src": "/stickers/tomato.png",
+            "pack_id": "zine_art",
+            "subpack_id": "zine_hand_drawn"
+          },
+          {
+            "id": "blueberries",
+            "label": "Blueberries Burst",
+            "filename": "blueberries.png",
+            "width": 188,
+            "height": 180,
+            "src": "/stickers/blueberries.png",
+            "pack_id": "zine_art",
+            "subpack_id": "zine_hand_drawn"
+          },
+          {
+            "id": "oval_sardines",
+            "label": "Oval Sardine Can",
+            "filename": "oval_sardines.png",
+            "width": 110,
+            "height": 174,
+            "src": "/stickers/oval_sardines.png",
+            "pack_id": "zine_art",
+            "subpack_id": "zine_hand_drawn"
+          },
+          {
+            "id": "tin_sardines",
+            "label": "Red Key Sardine Tin",
+            "filename": "tin_sardines.png",
+            "width": 149,
+            "height": 148,
+            "src": "/stickers/tin_sardines.png",
+            "pack_id": "zine_art",
+            "subpack_id": "zine_hand_drawn"
+          },
+          {
+            "id": "fig_slice",
+            "label": "Fresh Fig",
+            "filename": "fig_slice.png",
+            "width": 132,
+            "height": 134,
+            "src": "/stickers/fig_slice.png",
+            "pack_id": "zine_art",
+            "subpack_id": "zine_hand_drawn"
+          },
+          {
+            "id": "red_goldfish",
+            "label": "Red Goldfish",
+            "filename": "red_goldfish.png",
+            "width": 132,
+            "height": 149,
+            "src": "/stickers/red_goldfish.png",
+            "pack_id": "zine_art",
+            "subpack_id": "zine_hand_drawn"
+          },
+          {
+            "id": "rainbow_tuna",
+            "label": "Rainbow Tuna",
+            "filename": "rainbow_tuna.png",
+            "width": 233,
+            "height": 88,
+            "src": "/stickers/rainbow_tuna.png",
+            "pack_id": "zine_art",
+            "subpack_id": "zine_hand_drawn"
+          },
+          {
+            "id": "orange_goldfish",
+            "label": "Orange Goldfish",
+            "filename": "orange_goldfish.png",
+            "width": 157,
+            "height": 128,
+            "src": "/stickers/orange_goldfish.png",
+            "pack_id": "zine_art",
+            "subpack_id": "zine_hand_drawn"
+          },
+          {
+            "id": "salmon",
+            "label": "Pink Salmon",
+            "filename": "salmon.png",
+            "width": 238,
+            "height": 83,
+            "src": "/stickers/salmon.png",
+            "pack_id": "zine_art",
+            "subpack_id": "zine_hand_drawn"
+          },
+          {
+            "id": "pomegranate",
+            "label": "Ripe Pomegranate",
+            "filename": "pomegranate.png",
+            "width": 136,
+            "height": 139,
+            "src": "/stickers/pomegranate.png",
+            "pack_id": "zine_art",
+            "subpack_id": "zine_hand_drawn"
+          },
+          {
+            "id": "mango",
+            "label": "Sweet Mango",
+            "filename": "mango.png",
+            "width": 149,
+            "height": 133,
+            "src": "/stickers/mango.png",
+            "pack_id": "zine_art",
+            "subpack_id": "zine_hand_drawn"
+          },
+          {
+            "id": "yellow_sardine",
+            "label": "Yellow Sardine",
+            "filename": "yellow_sardine.png",
+            "width": 246,
+            "height": 77,
+            "src": "/stickers/yellow_sardine.png",
+            "pack_id": "zine_art",
+            "subpack_id": "zine_hand_drawn"
+          },
+          {
+            "id": "peeled_orange",
+            "label": "Peeled Clementine",
+            "filename": "peeled_orange.png",
+            "width": 142,
+            "height": 113,
+            "src": "/stickers/peeled_orange.png",
+            "pack_id": "zine_art",
+            "subpack_id": "zine_hand_drawn"
+          },
+          {
+            "id": "crane_bird",
+            "label": "Star Crane Bird",
+            "filename": "crane_bird.png",
+            "width": 123,
+            "height": 178,
+            "src": "/stickers/crane_bird.png",
+            "pack_id": "zine_art",
+            "subpack_id": "zine_hand_drawn"
+          },
+          {
+            "id": "blue_mackerel",
+            "label": "Blue Mackerel",
+            "filename": "blue_mackerel.png",
+            "width": 245,
+            "height": 74,
+            "src": "/stickers/blue_mackerel.png",
+            "pack_id": "zine_art",
+            "subpack_id": "zine_hand_drawn"
+          },
+          {
+            "id": "vertical_fish_trio",
+            "label": "Colorful Fish Trio",
+            "filename": "vertical_fish_trio.png",
+            "width": 134,
+            "height": 219,
+            "src": "/stickers/vertical_fish_trio.png",
+            "pack_id": "zine_art",
+            "subpack_id": "zine_hand_drawn"
+          },
+          {
+            "id": "yellow_bell_pepper",
+            "label": "Yellow Bell Pepper",
+            "filename": "yellow_bell_pepper.png",
+            "width": 197,
+            "height": 217,
+            "src": "/stickers/yellow_bell_pepper.png",
+            "pack_id": "zine_art",
+            "subpack_id": "zine_hand_drawn"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "real_fish",
+    "name": "Realistic Fish",
+    "icon": "\ud83d\udc1f",
+    "subpacks": [
+      {
+        "id": "ocean_species",
+        "name": "Aquarium & Ocean Species",
+        "items": [
+          {
+            "id": "real_fish_r1_c1",
+            "label": "Orange Zebra Fish",
+            "filename": "real_fish_r1_c1.png",
+            "src": "/stickers/real_fish/real_fish_r1_c1.png",
+            "width": 196,
+            "height": 68,
+            "pack_id": "real_fish",
+            "subpack_id": "ocean_species"
+          },
+          {
+            "id": "real_fish_r1_c2",
+            "label": "Red Mullet Goatfish",
+            "filename": "real_fish_r1_c2.png",
+            "src": "/stickers/real_fish/real_fish_r1_c2.png",
+            "width": 266,
+            "height": 94,
+            "pack_id": "real_fish",
+            "subpack_id": "ocean_species"
+          },
+          {
+            "id": "real_fish_r2_c1",
+            "label": "Ram Cichlid",
+            "filename": "real_fish_r2_c1.png",
+            "src": "/stickers/real_fish/real_fish_r2_c1.png",
+            "width": 218,
+            "height": 102,
+            "pack_id": "real_fish",
+            "subpack_id": "ocean_species"
+          },
+          {
+            "id": "real_fish_r2_c2",
+            "label": "Black Striped Angelfish",
+            "filename": "real_fish_r2_c2.png",
+            "src": "/stickers/real_fish/real_fish_r2_c2.png",
+            "width": 217,
+            "height": 104,
+            "pack_id": "real_fish",
+            "subpack_id": "ocean_species"
+          },
+          {
+            "id": "real_fish_r3_c1",
+            "label": "Neon Tetra",
+            "filename": "real_fish_r3_c1.png",
+            "src": "/stickers/real_fish/real_fish_r3_c1.png",
+            "width": 215,
+            "height": 66,
+            "pack_id": "real_fish",
+            "subpack_id": "ocean_species"
+          },
+          {
+            "id": "real_fish_r3_c2",
+            "label": "Sea Bream Porgy",
+            "filename": "real_fish_r3_c2.png",
+            "src": "/stickers/real_fish/real_fish_r3_c2.png",
+            "width": 229,
+            "height": 93,
+            "pack_id": "real_fish",
+            "subpack_id": "ocean_species"
+          },
+          {
+            "id": "real_fish_r4_c1",
+            "label": "Golden Goldfish",
+            "filename": "real_fish_r4_c1.png",
+            "src": "/stickers/real_fish/real_fish_r4_c1.png",
+            "width": 217,
+            "height": 98,
+            "pack_id": "real_fish",
+            "subpack_id": "ocean_species"
+          },
+          {
+            "id": "real_fish_r4_c2",
+            "label": "Striped Pilot Fish",
+            "filename": "real_fish_r4_c2.png",
+            "src": "/stickers/real_fish/real_fish_r4_c2.png",
+            "width": 244,
+            "height": 86,
+            "pack_id": "real_fish",
+            "subpack_id": "ocean_species"
+          },
+          {
+            "id": "real_fish_r5_c1",
+            "label": "Oranda Goldfish",
+            "filename": "real_fish_r5_c1.png",
+            "src": "/stickers/real_fish/real_fish_r5_c1.png",
+            "width": 202,
+            "height": 86,
+            "pack_id": "real_fish",
+            "subpack_id": "ocean_species"
+          },
+          {
+            "id": "real_fish_r5_c2",
+            "label": "Red Seabream",
+            "filename": "real_fish_r5_c2.png",
+            "src": "/stickers/real_fish/real_fish_r5_c2.png",
+            "width": 220,
+            "height": 105,
+            "pack_id": "real_fish",
+            "subpack_id": "ocean_species"
+          },
+          {
+            "id": "real_fish_r6_c1",
+            "label": "Silver Roach Carp",
+            "filename": "real_fish_r6_c1.png",
+            "src": "/stickers/real_fish/real_fish_r6_c1.png",
+            "width": 211,
+            "height": 79,
+            "pack_id": "real_fish",
+            "subpack_id": "ocean_species"
+          },
+          {
+            "id": "real_fish_r6_c2",
+            "label": "Colorful Gourami",
+            "filename": "real_fish_r6_c2.png",
+            "src": "/stickers/real_fish/real_fish_r6_c2.png",
+            "width": 217,
+            "height": 97,
+            "pack_id": "real_fish",
+            "subpack_id": "ocean_species"
+          },
+          {
+            "id": "real_fish_r7_c1",
+            "label": "Celestial Pearl Danio",
+            "filename": "real_fish_r7_c1.png",
+            "src": "/stickers/real_fish/real_fish_r7_c1.png",
+            "width": 234,
+            "height": 81,
+            "pack_id": "real_fish",
+            "subpack_id": "ocean_species"
+          },
+          {
+            "id": "real_fish_r7_c2",
+            "label": "Blue Mackerel Real",
+            "filename": "real_fish_r7_c2.png",
+            "src": "/stickers/real_fish/real_fish_r7_c2.png",
+            "width": 240,
+            "height": 49,
+            "pack_id": "real_fish",
+            "subpack_id": "ocean_species"
+          },
+          {
+            "id": "real_fish_r8_c1",
+            "label": "Bright Orange Goldfish",
+            "filename": "real_fish_r8_c1.png",
+            "src": "/stickers/real_fish/real_fish_r8_c1.png",
+            "width": 178,
+            "height": 80,
+            "pack_id": "real_fish",
+            "subpack_id": "ocean_species"
+          },
+          {
+            "id": "real_fish_r8_c2",
+            "label": "Deep Red Coral Grouper",
+            "filename": "real_fish_r8_c2.png",
+            "src": "/stickers/real_fish/real_fish_r8_c2.png",
+            "width": 253,
+            "height": 87,
+            "pack_id": "real_fish",
+            "subpack_id": "ocean_species"
+          },
+          {
+            "id": "real_fish_r9_c1",
+            "label": "Peacock Cichlid",
+            "filename": "real_fish_r9_c1.png",
+            "src": "/stickers/real_fish/real_fish_r9_c1.png",
+            "width": 251,
+            "height": 114,
+            "pack_id": "real_fish",
+            "subpack_id": "ocean_species"
+          },
+          {
+            "id": "real_fish_r9_c2",
+            "label": "Fancy Tail Guppy",
+            "filename": "real_fish_r9_c2.png",
+            "src": "/stickers/real_fish/real_fish_r9_c2.png",
+            "width": 238,
+            "height": 99,
+            "pack_id": "real_fish",
+            "subpack_id": "ocean_species"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "reaction_memes",
+    "name": "Reaction Memes",
+    "icon": "\ud83c\udfad",
+    "subpacks": [
+      {
+        "id": "meme_pack_1",
+        "name": "Meme Expressions 1",
+        "items": [
+          {
+            "id": "meme1_r1_c1",
+            "label": "Woman Reading Document",
+            "filename": "meme1_r1_c1.png",
+            "src": "/stickers/memes_1/meme1_r1_c1.png",
+            "width": 147,
+            "height": 88,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_1"
+          },
+          {
+            "id": "meme1_r1_c2",
+            "label": "Smug Girl Fur Coat",
+            "filename": "meme1_r1_c2.png",
+            "src": "/stickers/memes_1/meme1_r1_c2.png",
+            "width": 150,
+            "height": 111,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_1"
+          },
+          {
+            "id": "meme1_r1_c3",
+            "label": "Woody Shocked Cowboy",
+            "filename": "meme1_r1_c3.png",
+            "src": "/stickers/memes_1/meme1_r1_c3.png",
+            "width": 78,
+            "height": 110,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_1"
+          },
+          {
+            "id": "meme1_r2_c1",
+            "label": "Woman Towel Hair",
+            "filename": "meme1_r2_c1.png",
+            "src": "/stickers/memes_1/meme1_r2_c1.png",
+            "width": 83,
+            "height": 152,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_1"
+          },
+          {
+            "id": "meme1_r2_c2",
+            "label": "Doja Cat Blonde Smile",
+            "filename": "meme1_r2_c2.png",
+            "src": "/stickers/memes_1/meme1_r2_c2.png",
+            "width": 123,
+            "height": 151,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_1"
+          },
+          {
+            "id": "meme1_r2_c3",
+            "label": "White Chicks Laughing",
+            "filename": "meme1_r2_c3.png",
+            "src": "/stickers/memes_1/meme1_r2_c3.png",
+            "width": 149,
+            "height": 146,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_1"
+          },
+          {
+            "id": "meme1_r3_c1",
+            "label": "Pink Jacket Facepalm",
+            "filename": "meme1_r3_c1.png",
+            "src": "/stickers/memes_1/meme1_r3_c1.png",
+            "width": 147,
+            "height": 144,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_1"
+          },
+          {
+            "id": "meme1_r3_c2",
+            "label": "Curly Hair Pointing Side-Eye",
+            "filename": "meme1_r3_c2.png",
+            "src": "/stickers/memes_1/meme1_r3_c2.png",
+            "width": 144,
+            "height": 118,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_1"
+          },
+          {
+            "id": "meme1_r3_c3",
+            "label": "Shut Up Hand Gesture",
+            "filename": "meme1_r3_c3.png",
+            "src": "/stickers/memes_1/meme1_r3_c3.png",
+            "width": 145,
+            "height": 146,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_1"
+          },
+          {
+            "id": "meme1_r4_c1",
+            "label": "Guy White Tee Shrugging",
+            "filename": "meme1_r4_c1.png",
+            "src": "/stickers/memes_1/meme1_r4_c1.png",
+            "width": 149,
+            "height": 147,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_1"
+          },
+          {
+            "id": "meme1_r4_c2",
+            "label": "Guy Praying Hands Smile",
+            "filename": "meme1_r4_c2.png",
+            "src": "/stickers/memes_1/meme1_r4_c2.png",
+            "width": 146,
+            "height": 138,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_1"
+          },
+          {
+            "id": "meme1_r4_c3",
+            "label": "Prisoner Raised Eyebrow",
+            "filename": "meme1_r4_c3.png",
+            "src": "/stickers/memes_1/meme1_r4_c3.png",
+            "width": 149,
+            "height": 125,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_1"
+          },
+          {
+            "id": "meme1_r5_c1",
+            "label": "Pink Suit Shrug",
+            "filename": "meme1_r5_c1.png",
+            "src": "/stickers/memes_1/meme1_r5_c1.png",
+            "width": 149,
+            "height": 128,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_1"
+          },
+          {
+            "id": "meme1_r5_c2",
+            "label": "Guy Adjusting Sunglasses",
+            "filename": "meme1_r5_c2.png",
+            "src": "/stickers/memes_1/meme1_r5_c2.png",
+            "width": 149,
+            "height": 90,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_1"
+          },
+          {
+            "id": "meme1_r5_c3",
+            "label": "Snoop Dogg Side-Eye",
+            "filename": "meme1_r5_c3.png",
+            "src": "/stickers/memes_1/meme1_r5_c3.png",
+            "width": 100,
+            "height": 127,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_1"
+          }
+        ]
+      },
+      {
+        "id": "meme_pack_2",
+        "name": "Meme Expressions 2",
+        "items": [
+          {
+            "id": "meme2_r1_c1",
+            "label": "Kid Holding Cross",
+            "filename": "meme2_r1_c1.png",
+            "src": "/stickers/memes_2/meme2_r1_c1.png",
+            "width": 90,
+            "height": 179,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_2"
+          },
+          {
+            "id": "meme2_r1_c2",
+            "label": "FBI Tom Cats",
+            "filename": "meme2_r1_c2.png",
+            "src": "/stickers/memes_2/meme2_r1_c2.png",
+            "width": 166,
+            "height": 115,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_2"
+          },
+          {
+            "id": "meme2_r1_c3",
+            "label": "SpongeBob Under Lamp",
+            "filename": "meme2_r1_c3.png",
+            "src": "/stickers/memes_2/meme2_r1_c3.png",
+            "width": 86,
+            "height": 175,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_2"
+          },
+          {
+            "id": "meme2_r2_c1",
+            "label": "Guy Sipping Tea Sweater",
+            "filename": "meme2_r2_c1.png",
+            "src": "/stickers/memes_2/meme2_r2_c1.png",
+            "width": 171,
+            "height": 205,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_2"
+          },
+          {
+            "id": "meme2_r2_c2",
+            "label": "Animated Woman Yellow Dress",
+            "filename": "meme2_r2_c2.png",
+            "src": "/stickers/memes_2/meme2_r2_c2.png",
+            "width": 135,
+            "height": 176,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_2"
+          },
+          {
+            "id": "meme2_r2_c3",
+            "label": "White Walker Blue Face",
+            "filename": "meme2_r2_c3.png",
+            "src": "/stickers/memes_2/meme2_r2_c3.png",
+            "width": 159,
+            "height": 150,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_2"
+          },
+          {
+            "id": "meme2_r3_c1",
+            "label": "LeBron James Flex",
+            "filename": "meme2_r3_c1.png",
+            "src": "/stickers/memes_2/meme2_r3_c1.png",
+            "width": 184,
+            "height": 205,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_2"
+          },
+          {
+            "id": "meme2_r3_c2",
+            "label": "Naruto Crying Guy",
+            "filename": "meme2_r3_c2.png",
+            "src": "/stickers/memes_2/meme2_r3_c2.png",
+            "width": 135,
+            "height": 172,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_2"
+          },
+          {
+            "id": "meme2_r3_c3",
+            "label": "Guy Leaning Hand Cap",
+            "filename": "meme2_r3_c3.png",
+            "src": "/stickers/memes_2/meme2_r3_c3.png",
+            "width": 165,
+            "height": 160,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_2"
+          },
+          {
+            "id": "meme2_r4_c1",
+            "label": "Cinderella Crying",
+            "filename": "meme2_r4_c1.png",
+            "src": "/stickers/memes_2/meme2_r4_c1.png",
+            "width": 186,
+            "height": 205,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_2"
+          },
+          {
+            "id": "meme2_r4_c2",
+            "label": "Referee Timeout Gesture",
+            "filename": "meme2_r4_c2.png",
+            "src": "/stickers/memes_2/meme2_r4_c2.png",
+            "width": 165,
+            "height": 168,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_2"
+          },
+          {
+            "id": "meme2_r4_c3",
+            "label": "Will Smith Face Swap",
+            "filename": "meme2_r4_c3.png",
+            "src": "/stickers/memes_2/meme2_r4_c3.png",
+            "width": 160,
+            "height": 177,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_2"
+          },
+          {
+            "id": "meme2_r5_c1",
+            "label": "Woman Mask Removal",
+            "filename": "meme2_r5_c1.png",
+            "src": "/stickers/memes_2/meme2_r5_c1.png",
+            "width": 186,
+            "height": 205,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_2"
+          },
+          {
+            "id": "meme2_r5_c2",
+            "label": "Two Guys Waving Dancing",
+            "filename": "meme2_r5_c2.png",
+            "src": "/stickers/memes_2/meme2_r5_c2.png",
+            "width": 166,
+            "height": 108,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_2"
+          },
+          {
+            "id": "meme2_r5_c3",
+            "label": "Confused Guy Looking Down",
+            "filename": "meme2_r5_c3.png",
+            "src": "/stickers/memes_2/meme2_r5_c3.png",
+            "width": 163,
+            "height": 116,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_2"
+          }
+        ]
+      },
+      {
+        "id": "meme_pack_3",
+        "name": "Pop Culture & Memes 3",
+        "items": [
+          {
+            "id": "meme3_r1_c1",
+            "label": "Lightning McQueen",
+            "filename": "meme3_r1_c1.png",
+            "src": "/stickers/memes_3/meme3_r1_c1.png",
+            "width": 85,
+            "height": 71,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r1_c2",
+            "label": "Guy Hand Chest Gesture",
+            "filename": "meme3_r1_c2.png",
+            "src": "/stickers/memes_3/meme3_r1_c2.png",
+            "width": 83,
+            "height": 75,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r1_c3",
+            "label": "Kermit Sad Frog",
+            "filename": "meme3_r1_c3.png",
+            "src": "/stickers/memes_3/meme3_r1_c3.png",
+            "width": 62,
+            "height": 85,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r1_c4",
+            "label": "Elmo Fire Baby",
+            "filename": "meme3_r1_c4.png",
+            "src": "/stickers/memes_3/meme3_r1_c4.png",
+            "width": 86,
+            "height": 88,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r1_c5",
+            "label": "Side-Eye Chloe",
+            "filename": "meme3_r1_c5.png",
+            "src": "/stickers/memes_3/meme3_r1_c5.png",
+            "width": 85,
+            "height": 84,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r2_c1",
+            "label": "Toddler Counting Fingers",
+            "filename": "meme3_r2_c1.png",
+            "src": "/stickers/memes_3/meme3_r2_c1.png",
+            "width": 108,
+            "height": 117,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r2_c2",
+            "label": "Messy Hair Bed Girl",
+            "filename": "meme3_r2_c2.png",
+            "src": "/stickers/memes_3/meme3_r2_c2.png",
+            "width": 115,
+            "height": 119,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r2_c3",
+            "label": "Roblox Blonde Girl",
+            "filename": "meme3_r2_c3.png",
+            "src": "/stickers/memes_3/meme3_r2_c3.png",
+            "width": 108,
+            "height": 114,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r2_c4",
+            "label": "Bratz Dolls Shocked",
+            "filename": "meme3_r2_c4.png",
+            "src": "/stickers/memes_3/meme3_r2_c4.png",
+            "width": 109,
+            "height": 109,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r3_c1",
+            "label": "Barbie Doll Shocked",
+            "filename": "meme3_r3_c1.png",
+            "src": "/stickers/memes_3/meme3_r3_c1.png",
+            "width": 111,
+            "height": 108,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r3_c2",
+            "label": "Guy Holding Credit Card",
+            "filename": "meme3_r3_c2.png",
+            "src": "/stickers/memes_3/meme3_r3_c2.png",
+            "width": 110,
+            "height": 110,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r3_c3",
+            "label": "Dora Haircut Guy Smirk",
+            "filename": "meme3_r3_c3.png",
+            "src": "/stickers/memes_3/meme3_r3_c3.png",
+            "width": 104,
+            "height": 118,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r3_c4",
+            "label": "Mr Bean GTA Render",
+            "filename": "meme3_r3_c4.png",
+            "src": "/stickers/memes_3/meme3_r3_c4.png",
+            "width": 113,
+            "height": 112,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r4_c1",
+            "label": "Yellow Towel Stop Hand",
+            "filename": "meme3_r4_c1.png",
+            "src": "/stickers/memes_3/meme3_r4_c1.png",
+            "width": 110,
+            "height": 110,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r4_c2",
+            "label": "Eye Wide Shocked Hands Head",
+            "filename": "meme3_r4_c2.png",
+            "src": "/stickers/memes_3/meme3_r4_c2.png",
+            "width": 120,
+            "height": 120,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r4_c3",
+            "label": "Smirking Toddler Yellow Shirt",
+            "filename": "meme3_r4_c3.png",
+            "src": "/stickers/memes_3/meme3_r4_c3.png",
+            "width": 117,
+            "height": 120,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r4_c4",
+            "label": "CJ GTA Hands Behind Head",
+            "filename": "meme3_r4_c4.png",
+            "src": "/stickers/memes_3/meme3_r4_c4.png",
+            "width": 116,
+            "height": 110,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r5_c1",
+            "label": "Peter Griffin Telephone",
+            "filename": "meme3_r5_c1.png",
+            "src": "/stickers/memes_3/meme3_r5_c1.png",
+            "width": 126,
+            "height": 107,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r5_c2",
+            "label": "Barbie Facepalm Sunglasses",
+            "filename": "meme3_r5_c2.png",
+            "src": "/stickers/memes_3/meme3_r5_c2.png",
+            "width": 121,
+            "height": 121,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r5_c3",
+            "label": "Toddler Sunglasses Thumbs Up",
+            "filename": "meme3_r5_c3.png",
+            "src": "/stickers/memes_3/meme3_r5_c3.png",
+            "width": 123,
+            "height": 123,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r5_c4",
+            "label": "Traumatized Dog",
+            "filename": "meme3_r5_c4.png",
+            "src": "/stickers/memes_3/meme3_r5_c4.png",
+            "width": 109,
+            "height": 117,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r6_c1",
+            "label": "Shower Crying Guy",
+            "filename": "meme3_r6_c1.png",
+            "src": "/stickers/memes_3/meme3_r6_c1.png",
+            "width": 118,
+            "height": 103,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r6_c2",
+            "label": "Girl Looking Over Sunglasses",
+            "filename": "meme3_r6_c2.png",
+            "src": "/stickers/memes_3/meme3_r6_c2.png",
+            "width": 119,
+            "height": 117,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r6_c3",
+            "label": "1000-Yard Stare Soldier",
+            "filename": "meme3_r6_c3.png",
+            "src": "/stickers/memes_3/meme3_r6_c3.png",
+            "width": 114,
+            "height": 112,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r6_c4",
+            "label": "Cat Glass Jar",
+            "filename": "meme3_r6_c4.png",
+            "src": "/stickers/memes_3/meme3_r6_c4.png",
+            "width": 123,
+            "height": 118,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r7_c1",
+            "label": "Asian Girl Facepalm",
+            "filename": "meme3_r7_c1.png",
+            "src": "/stickers/memes_3/meme3_r7_c1.png",
+            "width": 123,
+            "height": 116,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r7_c2",
+            "label": "Boy Holding Cup Side-Eye",
+            "filename": "meme3_r7_c2.png",
+            "src": "/stickers/memes_3/meme3_r7_c2.png",
+            "width": 124,
+            "height": 124,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r7_c3",
+            "label": "White Dog Sunglasses",
+            "filename": "meme3_r7_c3.png",
+            "src": "/stickers/memes_3/meme3_r7_c3.png",
+            "width": 98,
+            "height": 153,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          },
+          {
+            "id": "meme3_r7_c4",
+            "label": "Roll Safe Guy Thinking",
+            "filename": "meme3_r7_c4.png",
+            "src": "/stickers/memes_3/meme3_r7_c4.png",
+            "width": 131,
+            "height": 131,
+            "pack_id": "reaction_memes",
+            "subpack_id": "meme_pack_3"
+          }
+        ]
+      }
+    ]
+  }
+]

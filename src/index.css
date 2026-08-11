@@ -1,0 +1,298 @@
+@font-face {
+  font-family: 'Pixelta';
+  src: url('./assets/fonts/pixelta/Pixelta.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pixelify Sans';
+  src: url('./assets/fonts/pixelify/PixelifySans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pixelify Sans';
+  src: url('./assets/fonts/pixelify/PixelifySans-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-display: 'Pixelta', cursive, serif;
+  --font-body: 'Pixelify Sans', monospace, sans-serif;
+  
+  --color-bg: #FF7A3D;
+  --color-card-bg: #FFFFFF;
+  --color-primary: #FF7A3D;
+  --color-primary-hover: #E85D3D;
+  --color-primary-dark: #D6551F;
+  --color-primary-light: #FFEDE0;
+  --color-primary-tint: #FFF3E9;
+  
+  --color-text-main: #3D2B1F;
+  --color-text-muted: #7A5C46;
+  --color-text-light: #A9876F;
+  
+  --color-border: #3D2B1F;
+  --color-border-subtle: #FFDBC0;
+  
+  --color-cat-ringan: #50B878;
+  --color-cat-sedang: #F59E0B;
+  --color-cat-tinggi: #E85D3D;
+  
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+  
+  /* Bold Card Outline & Tactile 2D Hard Offset Shadows */
+  --shadow-card: 6px 7px 0px #3D2B1F, 0 20px 40px rgba(0, 0, 0, 0.15);
+  --shadow-btn: 4px 4px 0px #3D2B1F;
+  --shadow-badge: 2.5px 2.5px 0px #FFDBC0;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  font-style: normal !important;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg);
+  background-image: radial-gradient(rgba(61, 43, 31, 0.28) 1.5px, transparent 1.5px);
+  background-size: 20px 20px;
+  font-family: var(--font-body);
+  color: var(--color-text-main);
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--font-body);
+  border: none;
+  background: none;
+  font-style: normal !important;
+  transition: all 0.15s ease;
+}
+
+input {
+  font-family: var(--font-body);
+  font-style: normal !important;
+  transition: all 0.2s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 3px rgba(255, 122, 61, 0.25);
+}
+
+button:focus-visible {
+  outline: 3px solid var(--color-text-main);
+  outline-offset: 2px;
+}
+
+/* Animations */
+@keyframes floatMascot {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-5px) rotate(1deg); }
+}
+
+@keyframes cardPopIn {
+  0% { opacity: 0; transform: scale(0.97) translateY(10px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.animate-float {
+  animation: floatMascot 3.5s ease-in-out infinite;
+}
+
+.animate-card {
+  animation: cardPopIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Bold Symmetrical Card Container */
+.card-container {
+  width: 100%;
+  max-width: 560px;
+  background: var(--color-card-bg);
+  border-radius: var(--radius-lg);
+  border: 3px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  padding: 36px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.zine-badge {
+  display: inline-block;
+  background: var(--color-primary-light);
+  color: var(--color-primary-hover);
+  border: 2px solid var(--color-border);
+  padding: 6px 18px;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-badge);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 600px) {
+  .card-container {
+    padding: 26px 20px;
+    border-radius: 24px;
+  }
+}
+
+.grid-5-equal {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  width: 100%;
+}
+
+.btn-group-equal {
+  display: flex;
+  gap: 14px;
+  width: 100%;
+  align-items: center;
+}
+
+.btn-group-equal > button {
+  flex: 1;
+  min-height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Sticker Floating & Wiggle Animations */
+@keyframes stickerSway {
+  0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+  25% { transform: translateY(-8px) rotate(-4deg) scale(1.03); }
+  50% { transform: translateY(-3px) rotate(3deg) scale(1.01); }
+  75% { transform: translateY(-10px) rotate(-2deg) scale(1.04); }
+}
+
+@keyframes stickerPulse {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.08) rotate(5deg); filter: drop-shadow(0 8px 16px rgba(0,0,0,0.25)); }
+}
+
+.floating-sticker {
+  position: absolute;
+  pointer-events: auto;
+  user-select: none;
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.25s ease;
+  filter: drop-shadow(3px 4px 6px rgba(0, 0, 0, 0.18));
+  z-index: 1;
+}
+
+.floating-sticker:hover {
+  transform: scale(1.18) rotate(6deg) translateY(-6px) !important;
+  filter: drop-shadow(6px 12px 16px rgba(0, 0, 0, 0.32));
+  z-index: 10 !important;
+  cursor: grab;
+}
+
+/* Interactive Sticker Tray & Editor */
+.sticker-tray {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 10px 4px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sticker-tray::-webkit-scrollbar {
+  height: 6px;
+}
+
+.sticker-tray::-webkit-scrollbar-track {
+  background: #FFF3E9;
+  border-radius: 10px;
+}
+
+.sticker-tray::-webkit-scrollbar-thumb {
+  background: #FF7A3D;
+  border-radius: 10px;
+}
+
+.sticker-chip {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  border: 2px solid #3D2B1F;
+  border-radius: 14px;
+  padding: 8px 12px;
+  box-shadow: 2px 3px 0px #3D2B1F;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  user-select: none;
+}
+
+.sticker-chip:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 4px 5px 0px #3D2B1F;
+  background: #FFF3E9;
+}
+
+.sticker-chip:active {
+  transform: translateY(1px);
+  box-shadow: 1px 1px 0px #3D2B1F;
+}
+
+.sticker-on-canvas {
+  position: absolute;
+  cursor: move;
+  user-select: none;
+  touch-action: none;
+  transition: box-shadow 0.15s ease;
+}
+
+.sticker-on-canvas.selected {
+  outline: 2px dashed #FF7A3D;
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+.sticker-control-btn {
+  background: #3D2B1F;
+  color: #FFFFFF;
+  border: 1.5px solid #FFFFFF;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  cursor: pointer;
+}
+
+.sticker-control-btn:hover {
+  background: #FF7A3D;
+  transform: scale(1.15);
+}
+
+
+
+
+
+
+
