@@ -2694,6 +2694,7 @@ async function saveEntryToSupabase(entry) {
         apikey: SUPABASE_ANON_KEY,
         Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
         "Content-Type": "application/json",
+        "x-upsert": "true",
       },
       body: blob,
     });
