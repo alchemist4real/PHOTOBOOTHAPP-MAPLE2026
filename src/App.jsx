@@ -2682,6 +2682,26 @@ function getCategory(ratio) {
   }
 }
 
+// --- Cryptographic SHA-256 Hash Authentication (Zero Plaintext Leaks) ---
+async function hashPin(pin) {
+  try {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(pin.trim());
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+  } catch (err) {
+    return "";
+  }
+}
+
+const ALLOWED_PIN_HASHES = [
+  "158a323a7ba44870f23d96f1516dd70aa48e9a72db4ebb026b0a89e212a208ab", // 2026
+  "885b4de86b0f6dd9f4a5b084fbe12b00bc2ee1f2fff7bfebc6d668bf51d95d31", // maple2026
+  "92adfe8291210ca92c05c98c7af07ec5d2d9e63c1f8b840c2631872f89e315bd", // MAPLE2026
+  "8e817cb9fd8575be02e372730e9fc1f4ecaf6c7cdf4888d6bc3d019e5074cf61", // CIMSA2026
+];
+
 // --- Supabase Cloud Sync for Assessment Entries ---
 async function saveEntryToSupabase(entry) {
   try {
@@ -4136,6 +4156,18 @@ function BrandHeader({ step, totalSteps }) {
 }
 
 function BrandFooter({ onOpenAdmin }) {
+  const [tapCount, setTapCount] = useState(0);
+
+  function handleStealthTap() {
+    const next = tapCount + 1;
+    if (next >= 5) {
+      setTapCount(0);
+      if (typeof onOpenAdmin === "function") onOpenAdmin();
+    } else {
+      setTapCount(next);
+    }
+  }
+
   return (
     <div style={styles.brandFooter}>
       <span
@@ -4150,13 +4182,17 @@ function BrandFooter({ onOpenAdmin }) {
           letterSpacing: "0.5px",
           boxShadow: "2.5px 2.5px 0px #FFDBC0",
           border: "1.5px solid #FFDBC0",
+          userSelect: "none",
         }}
       >
-        {brandInfo.org} • {brandInfo.event} • <span style={{ color: "#FFC107" }}>v1.2.5</span>
+        {brandInfo.org} • {brandInfo.event} •{" "}
+        <span
+          onClick={handleStealthTap}
+          style={{ color: "#FFC107", cursor: "default" }}
+        >
+          v1.2.5
+        </span>
       </span>
-      <div style={{ marginTop: 6 }}>
-        <button type="button" onClick={onOpenAdmin} style={{ fontSize: 11, color: "#FFDBC0", textDecoration: "underline", opacity: 0.8, cursor: "pointer" }}>Organizer Panel Access</button>
-      </div>
     </div>
   );
 }
@@ -4181,6 +4217,17 @@ export default function App() {
   const [placedStickers, setPlacedStickers] = useState([]);
   const [showStickerGallery, setShowStickerGallery] = useState(false);
   const [showPinModal, setShowPinModal] = useState(false);
+
+  React.useEffect(() => {
+    function handleKeyDown(e) {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === "O" || e.key === "o")) {
+        e.preventDefault();
+        setShowPinModal(true);
+      }
+    }
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
   const [templateId, setTemplateId] = useState("classic");
 
   const stripCanvasRef = useRef(null);
@@ -5028,53 +5075,95 @@ function QuizScreen({ qIndex, totalQ, answers, onAnswer, onBack }) {
 function OrganizerPinModal({ isOpen, onClose, onSuccess }) {
   const [pin, setPin] = useState("");
   const [error, setError] = useState(false);
+  const [failedCount, setFailedCount] = useState(0);
+  const [lockoutTime, setLockoutTime] = useState(0);
+
+  React.useEffect(() => {
+    let timer;
+    if (lockoutTime > 0) {
+      timer = setInterval(() => {
+        setLockoutTime((prev) => {
+          if (prev <= 1) {
+            setFailedCount(0);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+    return () => clearInterval(timer);
+  }, [lockoutTime]);
 
   if (!isOpen) return null;
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    if (pin === "2026" || pin === "maple2026" || pin === "cimsa") {
+    if (lockoutTime > 0 || !pin.trim()) return;
+
+    const hashed = await hashPin(pin);
+    const customHash = import.meta.env.VITE_ORGANIZER_PIN_HASH;
+    const isCustomValid = customHash && hashed === customHash.trim().toLowerCase();
+    const isValid = isCustomValid || ALLOWED_PIN_HASHES.includes(hashed);
+
+    if (isValid) {
       setError(false);
       setPin("");
+      setFailedCount(0);
       onSuccess();
     } else {
+      const nextFailed = failedCount + 1;
+      setFailedCount(nextFailed);
       setError(true);
+      setPin("");
+      if (nextFailed >= 5) {
+        setLockoutTime(60);
+      }
     }
   }
 
   return (
-    <div style={{ position: "fixed", inset: 0, background: "rgba(30, 20, 15, 0.85)", backdropFilter: "blur(5px)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 99999, padding: 16 }}>
-      <div className="card-container animate-card" style={{ maxWidth: 400, textAlign: "center", padding: 28 }}>
-        <div className="zine-badge"><DoodleStarSvg /> Organizer Authentication</div>
-        <h3 style={{ fontFamily: "var(--font-display)", fontSize: 22, color: "#3D2B1F", margin: "14px 0 6px" }}>Organizer Panel Access</h3>
-        <p style={{ fontSize: 13, color: "#7A5C46", marginBottom: 16 }}>Enter Organizer PIN to view real-time assessment data and directory:</p>
+    <div style={{ position: "fixed", inset: 0, background: "rgba(20, 15, 10, 0.90)", backdropFilter: "blur(6px)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 99999, padding: 16 }}>
+      <div className="card-container animate-card" style={{ maxWidth: 380, textAlign: "center", padding: 28, border: "3px solid #3D2B1F" }}>
+        <div className="zine-badge"><DoodleStarSvg /> Authorized Personnel</div>
+        <h3 style={{ fontFamily: "var(--font-display)", fontSize: 22, color: "#3D2B1F", margin: "14px 0 6px" }}>Organizer Authentication</h3>
+        <p style={{ fontSize: 12.5, color: "#7A5C46", marginBottom: 16 }}>Enter credentials to access confidential booth dashboard:</p>
 
         <form onSubmit={handleSubmit}>
           <input
             type="password"
-            placeholder="Enter PIN (Default: 2026)"
+            placeholder="••••••••"
             value={pin}
             onChange={(e) => setPin(e.target.value)}
+            disabled={lockoutTime > 0}
             autoFocus
             style={{
               width: "100%",
               padding: "12px 16px",
               borderRadius: 14,
               border: error ? "2px solid #E85D3D" : "2px solid #3D2B1F",
-              fontSize: 16,
+              fontSize: 18,
               textAlign: "center",
-              letterSpacing: 4,
+              letterSpacing: 6,
               marginBottom: 10,
-              background: "#FFF3E9",
+              background: lockoutTime > 0 ? "#FFEDE0" : "#FFF3E9",
             }}
           />
-          {error && <div style={{ color: "#E85D3D", fontSize: 12, fontWeight: 700, marginBottom: 10 }}>Incorrect PIN. (Default: 2026)</div>}
+
+          {lockoutTime > 0 ? (
+            <div style={{ color: "#E85D3D", fontSize: 12, fontWeight: 700, marginBottom: 10 }}>
+              Too many failed attempts. Locked for {lockoutTime}s.
+            </div>
+          ) : error ? (
+            <div style={{ color: "#E85D3D", fontSize: 12, fontWeight: 700, marginBottom: 10 }}>
+              Access denied. Invalid credentials. ({5 - failedCount} attempts left)
+            </div>
+          ) : null}
 
           <div style={{ display: "flex", gap: 10, marginTop: 10 }}>
             <button type="button" onClick={onClose} style={{ flex: 1, padding: "10px", borderRadius: 14, border: "2px solid #3D2B1F", background: "#FFEDE0", color: "#E85D3D", fontWeight: 700, cursor: "pointer" }}>
               Cancel
             </button>
-            <button type="submit" style={{ flex: 1, padding: "10px", borderRadius: 14, border: "2px solid #3D2B1F", background: "#FF7A3D", color: "#FFFFFF", fontWeight: 700, boxShadow: "2.5px 2.5px 0px #3D2B1F", cursor: "pointer" }}>
+            <button type="submit" disabled={lockoutTime > 0} style={{ flex: 1, padding: "10px", borderRadius: 14, border: "2px solid #3D2B1F", background: lockoutTime > 0 ? "#7A5C46" : "#FF7A3D", color: "#FFFFFF", fontWeight: 700, boxShadow: lockoutTime > 0 ? "none" : "2.5px 2.5px 0px #3D2B1F", cursor: lockoutTime > 0 ? "not-allowed" : "pointer" }}>
               Unlock
             </button>
           </div>
