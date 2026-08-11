@@ -2682,12 +2682,69 @@ function getCategory(ratio) {
   }
 }
 
+// --- Supabase Cloud Sync for Assessment Entries ---
+async function saveEntryToSupabase(entry) {
+  try {
+    const jsonString = JSON.stringify(entry);
+    const blob = new Blob([jsonString], { type: "application/json" });
+    const filePath = `entries/${entry.ts}_${entry.id}.json`;
+    const res = await fetch(`${SUPABASE_URL}/storage/v1/object/${STORAGE_BUCKET}/${filePath}`, {
+      method: "POST",
+      headers: {
+        apikey: SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: blob,
+    });
+    return res.ok;
+  } catch (err) {
+    console.error("Supabase entry save error:", err);
+    return false;
+  }
+}
+
+async function listEntriesFromSupabase() {
+  try {
+    const res = await fetch(`${SUPABASE_URL}/storage/v1/object/list/${STORAGE_BUCKET}`, {
+      method: "POST",
+      headers: {
+        apikey: SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ prefix: "entries/", limit: 500 }),
+    });
+    if (!res.ok) return [];
+    const files = await res.json();
+    if (!Array.isArray(files)) return [];
+
+    const jsonFiles = files.filter((f) => f.name && f.name.endsWith(".json"));
+    const fetched = await Promise.all(
+      jsonFiles.map(async (f) => {
+        try {
+          const fileRes = await fetch(`${SUPABASE_URL}/storage/v1/object/public/${STORAGE_BUCKET}/entries/${f.name}`, {
+            headers: { apikey: SUPABASE_ANON_KEY },
+          });
+          if (fileRes.ok) return await fileRes.json();
+        } catch {}
+        return null;
+      })
+    );
+    return fetched.filter(Boolean);
+  } catch (err) {
+    console.error("Supabase entry list error:", err);
+    return [];
+  }
+}
+
 const STORAGE_PREFIX = "maple_entry_";
 const OLD_STORAGE_PREFIX = "sehatin_entry_";
 
 async function saveEntry(entry) {
   try {
     localStorage.setItem(STORAGE_PREFIX + entry.id, JSON.stringify(entry));
+    saveEntryToSupabase(entry);
     return true;
   } catch (err) {
     console.error("save failed", err);
@@ -2697,17 +2754,25 @@ async function saveEntry(entry) {
 
 async function listEntries() {
   try {
-    const list = [];
+    const localList = [];
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
       if (key && (key.startsWith(STORAGE_PREFIX) || key.startsWith(OLD_STORAGE_PREFIX))) {
         try {
           const item = localStorage.getItem(key);
-          if (item) list.push(JSON.parse(item));
+          if (item) localList.push(JSON.parse(item));
         } catch {}
       }
     }
-    return list.sort((a, b) => a.ts - b.ts);
+
+    const cloudList = await listEntriesFromSupabase();
+    const map = new Map();
+    [...localList, ...cloudList].forEach((e) => {
+      if (e && e.id) map.set(e.id, e);
+    });
+
+    const combined = Array.from(map.values());
+    return combined.sort((a, b) => (b.ts || 0) - (a.ts || 0));
   } catch (err) {
     console.error("list failed", err);
     return [];
@@ -4069,7 +4134,7 @@ function BrandHeader({ step, totalSteps }) {
   );
 }
 
-function BrandFooter() {
+function BrandFooter({ onOpenAdmin }) {
   return (
     <div style={styles.brandFooter}>
       <span
@@ -4088,6 +4153,9 @@ function BrandFooter() {
       >
         {brandInfo.org} • {brandInfo.event} • <span style={{ color: "#FFC107" }}>v1.2.5</span>
       </span>
+      <div style={{ marginTop: 6 }}>
+        <button type="button" onClick={onOpenAdmin} style={{ fontSize: 11, color: "#FFDBC0", textDecoration: "underline", opacity: 0.8, cursor: "pointer" }}>Organizer Panel Access</button>
+      </div>
     </div>
   );
 }
@@ -4111,6 +4179,7 @@ export default function App() {
   const [uploading, setUploading] = useState(false);
   const [placedStickers, setPlacedStickers] = useState([]);
   const [showStickerGallery, setShowStickerGallery] = useState(false);
+  const [showPinModal, setShowPinModal] = useState(false);
   const [templateId, setTemplateId] = useState("classic");
 
   const stripCanvasRef = useRef(null);
@@ -4353,7 +4422,7 @@ export default function App() {
 
   return (
     <div style={styles.appRoot}>
-      {screen === "welcome" && <WelcomeScreen onStart={() => setScreen("identity")} onAdmin={loadAdmin} />}
+      {screen === "welcome" && <WelcomeScreen onStart={() => setScreen("identity")} onAdmin={() => setShowPinModal(true)} />}
       {screen === "identity" && (
         <IdentityScreen
           identity={identity}
@@ -4418,6 +4487,15 @@ export default function App() {
           onSelectSticker={() => setShowStudio(true)}
         />
       )}
+
+      <OrganizerPinModal
+        isOpen={showPinModal}
+        onClose={() => setShowPinModal(false)}
+        onSuccess={() => {
+          setShowPinModal(false);
+          loadAdmin();
+        }}
+      />
 
       {showStudio && (
         <PhotoboothStudio
@@ -4756,7 +4834,7 @@ function WelcomeScreen({ onStart, onAdmin }) {
             Organizer Panel
           </button>
         )}
-        <BrandFooter />
+        <BrandFooter onOpenAdmin={() => setShowPinModal(true)} />
       </div>
     </div>
   );
@@ -4946,79 +5024,349 @@ function QuizScreen({ qIndex, totalQ, answers, onAnswer, onBack }) {
 }
 
 
+function OrganizerPinModal({ isOpen, onClose, onSuccess }) {
+  const [pin, setPin] = useState("");
+  const [error, setError] = useState(false);
+
+  if (!isOpen) return null;
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (pin === "2026" || pin === "maple2026" || pin === "cimsa") {
+      setError(false);
+      setPin("");
+      onSuccess();
+    } else {
+      setError(true);
+    }
+  }
+
+  return (
+    <div style={{ position: "fixed", inset: 0, background: "rgba(30, 20, 15, 0.85)", backdropFilter: "blur(5px)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 99999, padding: 16 }}>
+      <div className="card-container animate-card" style={{ maxWidth: 400, textAlign: "center", padding: 28 }}>
+        <div className="zine-badge"><DoodleStarSvg /> Organizer Authentication</div>
+        <h3 style={{ fontFamily: "var(--font-display)", fontSize: 22, color: "#3D2B1F", margin: "14px 0 6px" }}>Organizer Panel Access</h3>
+        <p style={{ fontSize: 13, color: "#7A5C46", marginBottom: 16 }}>Enter Organizer PIN to view real-time assessment data and directory:</p>
+
+        <form onSubmit={handleSubmit}>
+          <input
+            type="password"
+            placeholder="Enter PIN (Default: 2026)"
+            value={pin}
+            onChange={(e) => setPin(e.target.value)}
+            autoFocus
+            style={{
+              width: "100%",
+              padding: "12px 16px",
+              borderRadius: 14,
+              border: error ? "2px solid #E85D3D" : "2px solid #3D2B1F",
+              fontSize: 16,
+              textAlign: "center",
+              letterSpacing: 4,
+              marginBottom: 10,
+              background: "#FFF3E9",
+            }}
+          />
+          {error && <div style={{ color: "#E85D3D", fontSize: 12, fontWeight: 700, marginBottom: 10 }}>Incorrect PIN. (Default: 2026)</div>}
+
+          <div style={{ display: "flex", gap: 10, marginTop: 10 }}>
+            <button type="button" onClick={onClose} style={{ flex: 1, padding: "10px", borderRadius: 14, border: "2px solid #3D2B1F", background: "#FFEDE0", color: "#E85D3D", fontWeight: 700, cursor: "pointer" }}>
+              Cancel
+            </button>
+            <button type="submit" style={{ flex: 1, padding: "10px", borderRadius: 14, border: "2px solid #3D2B1F", background: "#FF7A3D", color: "#FFFFFF", fontWeight: 700, boxShadow: "2.5px 2.5px 0px #3D2B1F", cursor: "pointer" }}>
+              Unlock
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
+
 function AdminScreen({ entries, loading, onDownloadCSV, onBack, onRefresh }) {
+  const [adminTab, setAdminTab] = useState("analytics"); // "analytics" | "directory"
+  const [search, setSearch] = useState("");
+  const [catFilter, setCatFilter] = useState("all"); // "all" | "Light" | "Moderate" | "High"
+
   const count = entries.length;
+
+  // Dimension Averages
   const dimAvgs = dimensions.map((dim) => {
-    const avg = count ? entries.reduce((acc, e) => acc + (e.scores[dim.key] || 0), 0) / count : 0;
+    const avg = count ? entries.reduce((acc, e) => acc + (e.scores?.[dim.key] || 0), 0) / count : 0;
     return { ...dim, avg };
   });
 
+  // Category counts & percentages
   const catCounts = { Light: 0, Moderate: 0, High: 0 };
   entries.forEach((e) => {
-    catCounts[e.category] = (catCounts[e.category] || 0) + 1;
+    if (e.category) catCounts[e.category] = (catCounts[e.category] || 0) + 1;
   });
+
+  // Faculty distribution
+  const facultyCounts = {};
+  entries.forEach((e) => {
+    const fac = e.faculty?.trim() || "Unspecified";
+    facultyCounts[fac] = (facultyCounts[fac] || 0) + 1;
+  });
+  const topFaculties = Object.entries(facultyCounts).sort((a, b) => b[1] - a[1]);
+
+  // Filtered directory list
+  const filteredEntries = entries.filter((e) => {
+    const matchesCat = catFilter === "all" || e.category === catFilter;
+    const q = search.toLowerCase();
+    const matchesSearch =
+      !search ||
+      (e.name || "").toLowerCase().includes(q) ||
+      (e.faculty || "").toLowerCase().includes(q) ||
+      (e.cohort || "").toLowerCase().includes(q);
+    return matchesCat && matchesSearch;
+  });
+
+  function handleDeleteEntry(id) {
+    if (window.confirm("Are you sure you want to remove this local entry?")) {
+      try {
+        localStorage.removeItem(STORAGE_PREFIX + id);
+        localStorage.removeItem(OLD_STORAGE_PREFIX + id);
+        onRefresh();
+      } catch (err) {
+        console.error("Delete entry error", err);
+      }
+    }
+  }
 
   return (
     <div style={styles.center}>
-      <div className="card-container animate-card" style={{ maxWidth: 620 }}>
-        <div className="zine-badge"><DoodleStarSvg /> Organizer Panel</div>
-        <h2 style={styles.h2}>MAPLE 2026 Summary</h2>
+      <div className="card-container animate-card" style={{ maxWidth: 680, padding: 28 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+          <div className="zine-badge"><DoodleStarSvg /> Organizer Panel</div>
+          <span style={{ fontSize: 11.5, background: "#E8F8F5", color: "#1A8A7D", border: "1.5px solid #1A8A7D", padding: "3px 10px", borderRadius: 12, fontWeight: 700 }}>
+            Cloud Synced ({count} Total)
+          </span>
+        </div>
+
+        <h2 style={styles.h2}>MAPLE 2026 Assessment Dashboard</h2>
+        <p style={{ fontSize: 13, color: "#7A5C46", marginTop: -8, marginBottom: 16 }}>
+          Real-time academic burnout analytics & respondent management for CIMSA Unsoed organizers.
+        </p>
+
+        {/* Tab Selector */}
+        <div style={{ display: "flex", gap: 8, margin: "14px 0 16px", background: "#FFF3E9", padding: 5, borderRadius: 16, border: "2px solid #3D2B1F" }}>
+          <button
+            type="button"
+            onClick={() => setAdminTab("analytics")}
+            style={{
+              flex: 1,
+              padding: "9px 12px",
+              borderRadius: 12,
+              fontSize: 13.5,
+              fontWeight: 700,
+              background: adminTab === "analytics" ? "#FF7A3D" : "transparent",
+              color: adminTab === "analytics" ? "#FFFFFF" : "#3D2B1F",
+              border: adminTab === "analytics" ? "2px solid #3D2B1F" : "none",
+              boxShadow: adminTab === "analytics" ? "2px 2px 0px #3D2B1F" : "none",
+              cursor: "pointer",
+            }}
+          >
+            Analytics Summary
+          </button>
+          <button
+            type="button"
+            onClick={() => setAdminTab("directory")}
+            style={{
+              flex: 1,
+              padding: "9px 12px",
+              borderRadius: 12,
+              fontSize: 13.5,
+              fontWeight: 700,
+              background: adminTab === "directory" ? "#FF7A3D" : "transparent",
+              color: adminTab === "directory" ? "#FFFFFF" : "#3D2B1F",
+              border: adminTab === "directory" ? "2px solid #3D2B1F" : "none",
+              boxShadow: adminTab === "directory" ? "2px 2px 0px #3D2B1F" : "none",
+              cursor: "pointer",
+            }}
+          >
+            Respondent Directory ({count})
+          </button>
+        </div>
+
         {loading ? (
-          <p style={{ textAlign: "center", color: "#7A5C46" }}>Loading data...</p>
-        ) : (
+          <div style={{ padding: "40px 0", textAlign: "center", color: "#7A5C46", fontWeight: 700 }}>
+            Syncing data with Supabase Cloud...
+          </div>
+        ) : adminTab === "analytics" ? (
           <>
-            <p style={styles.pMuted}>
-              Total respondents: <b>{count}</b>
-            </p>
-            
+            {/* Category Breakdown Cards */}
             <div style={styles.catGridSymmetric}>
               <div style={{ ...styles.catCard, borderTop: "4px solid #50B878" }}>
-                <div style={styles.catCardLabel}>Light</div>
+                <div style={styles.catCardLabel}>Light Burnout</div>
                 <div style={styles.catCardValue}>{catCounts.Light || 0}</div>
+                <div style={{ fontSize: 11, color: "#7A5C46", fontWeight: 700 }}>
+                  {count ? Math.round(((catCounts.Light || 0) / count) * 100) : 0}%
+                </div>
               </div>
               <div style={{ ...styles.catCard, borderTop: "4px solid #F59E0B" }}>
-                <div style={styles.catCardLabel}>Moderate</div>
+                <div style={styles.catCardLabel}>Moderate Burnout</div>
                 <div style={styles.catCardValue}>{catCounts.Moderate || 0}</div>
+                <div style={{ fontSize: 11, color: "#7A5C46", fontWeight: 700 }}>
+                  {count ? Math.round(((catCounts.Moderate || 0) / count) * 100) : 0}%
+                </div>
               </div>
               <div style={{ ...styles.catCard, borderTop: "4px solid #E85D3D" }}>
-                <div style={styles.catCardLabel}>High</div>
+                <div style={styles.catCardLabel}>High Burnout</div>
                 <div style={styles.catCardValue}>{catCounts.High || 0}</div>
+                <div style={{ fontSize: 11, color: "#7A5C46", fontWeight: 700 }}>
+                  {count ? Math.round(((catCounts.High || 0) / count) * 100) : 0}%
+                </div>
               </div>
             </div>
 
-            <div style={{ marginTop: 20 }}>
-              <div style={{ fontWeight: 700, color: "#3D2B1F", marginBottom: 10, fontSize: 15 }}>
-                Average Score per Dimension (1 - 5):
+            {/* Dimension Breakdown Bars */}
+            <div style={{ marginTop: 20, textAlign: "left", background: "#FFF8F3", padding: 16, borderRadius: 18, border: "2px solid #3D2B1F" }}>
+              <div style={{ fontWeight: 700, color: "#3D2B1F", marginBottom: 12, fontSize: 14 }}>
+                Dimension Average Scores (Scale 1.0 - 5.0):
               </div>
               {dimAvgs.map((dim) => (
-                <div key={dim.key} style={styles.barRow}>
-                  <span style={styles.barLabel}>
-                    {dim.code} {dim.label}
-                  </span>
-                  <div style={styles.barTrack}>
+                <div key={dim.key} style={{ marginBottom: 10 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12.5, fontWeight: 700, color: "#3D2B1F", marginBottom: 4 }}>
+                    <span>{dim.code} {dim.fullLabel}</span>
+                    <span>{dim.avg.toFixed(1)} / 5.0</span>
+                  </div>
+                  <div style={{ height: 12, background: "#FFF3E9", borderRadius: 8, border: "1.5px solid #3D2B1F", overflow: "hidden" }}>
                     <div
                       style={{
-                        ...styles.barFill,
+                        height: "100%",
                         width: `${(dim.avg / 5) * 100}%`,
+                        background: dim.avg > 3.2 ? "#E85D3D" : dim.avg > 2.2 ? "#F59E0B" : "#50B878",
+                        transition: "width 0.4s ease",
                       }}
                     />
                   </div>
-                  <span style={styles.barVal}>{dim.avg.toFixed(1)}</span>
                 </div>
               ))}
+            </div>
+
+            {/* Faculty Distribution */}
+            {topFaculties.length > 0 && (
+              <div style={{ marginTop: 16, textAlign: "left", background: "#FFF8F3", padding: 14, borderRadius: 16, border: "2px solid #3D2B1F" }}>
+                <div style={{ fontWeight: 700, color: "#3D2B1F", marginBottom: 8, fontSize: 13 }}>
+                  Top Participating Faculties:
+                </div>
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                  {topFaculties.slice(0, 6).map(([fac, num]) => (
+                    <span key={fac} style={{ background: "#FFEDE0", border: "1.5px solid #3D2B1F", borderRadius: 10, padding: "4px 10px", fontSize: 12, fontWeight: 700, color: "#3D2B1F" }}>
+                      {fac}: <b>{num}</b>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </>
+        ) : (
+          <>
+            {/* Search & Filter Controls */}
+            <div style={{ display: "flex", gap: 10, marginBottom: 14 }}>
+              <input
+                type="text"
+                placeholder="Search name, cohort, faculty..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                style={{
+                  flex: 2,
+                  padding: "9px 14px",
+                  borderRadius: 12,
+                  border: "2px solid #3D2B1F",
+                  fontSize: 13,
+                  background: "#FFF3E9",
+                }}
+              />
+              <select
+                value={catFilter}
+                onChange={(e) => setCatFilter(e.target.value)}
+                style={{
+                  flex: 1,
+                  padding: "9px 10px",
+                  borderRadius: 12,
+                  border: "2px solid #3D2B1F",
+                  fontSize: 12.5,
+                  fontWeight: 700,
+                  background: "#FFF3E9",
+                  color: "#3D2B1F",
+                  cursor: "pointer",
+                }}
+              >
+                <option value="all">All Levels ({count})</option>
+                <option value="Light">Light ({catCounts.Light || 0})</option>
+                <option value="Moderate">Moderate ({catCounts.Moderate || 0})</option>
+                <option value="High">High ({catCounts.High || 0})</option>
+              </select>
+            </div>
+
+            {/* Respondent Directory Table */}
+            <div style={{ maxHeight: 360, overflowY: "auto", border: "2px solid #3D2B1F", borderRadius: 14, background: "#FFFFFF" }}>
+              {filteredEntries.length === 0 ? (
+                <div style={{ padding: "30px 0", color: "#7A5C46", fontSize: 13, fontWeight: 600 }}>
+                  No respondents found matching your filters.
+                </div>
+              ) : (
+                <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left", fontSize: 12.5 }}>
+                  <thead>
+                    <tr style={{ background: "#FFEDE0", borderBottom: "2px solid #3D2B1F", color: "#3D2B1F" }}>
+                      <th style={{ padding: "10px 12px", fontWeight: 700 }}>#</th>
+                      <th style={{ padding: "10px 12px", fontWeight: 700 }}>Name</th>
+                      <th style={{ padding: "10px 12px", fontWeight: 700 }}>Faculty / Year</th>
+                      <th style={{ padding: "10px 12px", fontWeight: 700 }}>Burnout</th>
+                      <th style={{ padding: "10px 12px", fontWeight: 700 }}>Date</th>
+                      <th style={{ padding: "10px 12px", textAlign: "center" }}>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredEntries.map((e, idx) => {
+                      const catCol = e.category === "High" ? "#E85D3D" : e.category === "Moderate" ? "#F59E0B" : "#50B878";
+                      const dateStr = e.ts ? new Date(e.ts).toLocaleDateString("en-GB", { month: "short", day: "numeric" }) : "-";
+                      const scorePct = Math.round((e.overall01 || 0) * 100);
+                      return (
+                        <tr key={e.id || idx} style={{ borderBottom: "1px solid #FFDBC0" }}>
+                          <td style={{ padding: "10px 12px", fontWeight: 700, color: "#7A5C46" }}>{idx + 1}</td>
+                          <td style={{ padding: "10px 12px", fontWeight: 700, color: "#3D2B1F" }}>{e.name || "Anonymous"}</td>
+                          <td style={{ padding: "10px 12px", color: "#5A3E2B" }}>
+                            {e.faculty || "-"} {e.cohort ? `'${String(e.cohort).slice(-2)}` : ""}
+                          </td>
+                          <td style={{ padding: "10px 12px" }}>
+                            <span style={{ background: catCol, color: "#FFF", fontWeight: 700, padding: "2px 8px", borderRadius: 8, fontSize: 11 }}>
+                              {e.category || "Light"} ({scorePct}%)
+                            </span>
+                          </td>
+                          <td style={{ padding: "10px 12px", color: "#7A5C46", fontSize: 11.5 }}>{dateStr}</td>
+                          <td style={{ padding: "10px 12px", textAlign: "center" }}>
+                            <button
+                              type="button"
+                              onClick={() => handleDeleteEntry(e.id)}
+                              style={{ background: "transparent", color: "#E85D3D", border: "none", fontSize: 14, cursor: "pointer", padding: "2px 6px" }}
+                              title="Delete local entry"
+                            >
+                              Remove
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              )}
             </div>
           </>
         )}
 
-        <div className="btn-group-equal" style={{ marginTop: 24 }}>
+        {/* Action Controls */}
+        <div className="btn-group-equal" style={{ marginTop: 20 }}>
           <button style={styles.btnGhostEqual} onClick={onBack}>
-            ← Booth
+            Exit Panel
           </button>
           <button style={styles.btnSecondaryEqual} onClick={onRefresh}>
-            Refresh Data
+            Refresh
           </button>
           <button style={styles.btnPrimaryEqual} onClick={onDownloadCSV} disabled={!count}>
-            Export CSV
+            Export CSV ({count})
           </button>
         </div>
       </div>
